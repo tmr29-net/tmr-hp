@@ -1,0 +1,30 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    # 3日に1回くらいのペースで自動実行（UTC時間ベース）
+    - cron: '0 0 */3 * *'
+  workflow_dispatch: # 手動でも動かせるようにする
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase Database
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const url = process.env.SUPABASE_URL + '/rest/v1/posts?select=id&limit=1';
+            const response = await fetch(url, {
+              headers: {
+                'apikey': process.env.SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`
+              }
+            });
+            if (!response.ok) {
+              throw new Error(`Ping failed with status: ${response.status}`);
+            }
+            console.log('Supabase successfully pinged and kept alive!');
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
