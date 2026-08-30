@@ -23,7 +23,7 @@ export default function Works() {
   const fetchProjects = async (currentOffset) => {
     try {
       const res = await fetch(
-        `/api/scratch/users/${SCRATCH_USERNAME}/projects?limit=${LIMIT}&offset=${currentOffset}`
+        `https://api.scratch.mit.edu/users/${SCRATCH_USERNAME}/projects?limit=${LIMIT}&offset=${currentOffset}`
       );
       if (!res.ok) return [];
       const data = await res.json();
