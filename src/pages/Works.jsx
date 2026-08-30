@@ -19,11 +19,11 @@ export default function Works() {
   const SCRATCH_USERNAME = 'tomo_piyo';
   const LIMIT = 20;
 
-  // 作品データを取得する共通関数
+  // 作品データを取得する共通関数（Vercel Serverless Function経由）
   const fetchProjects = async (currentOffset) => {
     try {
       const res = await fetch(
-        `https://api.scratch.mit.edu/users/${SCRATCH_USERNAME}/projects?limit=${LIMIT}&offset=${currentOffset}`
+        `/api/scratch?type=user_projects&target=${SCRATCH_USERNAME}&offset=${currentOffset}&limit=${LIMIT}`
       );
       if (!res.ok) return [];
       const data = await res.json();
@@ -63,7 +63,7 @@ export default function Works() {
     initFetch();
   }, []);
 
-  // ピックアップ作品の取得処理
+  // ピックアップ作品の取得処理（Vercel Serverless Function経由）
   const fetchPickupProjects = async (loadedProjects) => {
     const promises = PICKUP_PROJECT_IDS.map(async (item) => {
       const found = loadedProjects.find((p) => p.id === String(item.id));
@@ -72,7 +72,7 @@ export default function Works() {
       }
 
       try {
-        const res = await fetch(`/api/scratch/projects/${item.id}`);
+        const res = await fetch(`/api/scratch?type=project&target=${item.id}`);
         if (!res.ok) throw new Error();
         const p = await res.json();
         return {
@@ -206,7 +206,7 @@ export default function Works() {
                       {project.title}
                     </h2>
 
-                    {/* ピックアップのコメント（絵文字削除・whitespace-pre-wrapで改行対応） */}
+                    {/* ピックアップのコメント */}
                     {activeTab === 'pickup' && project.pickupComment && (
                       <p className="text-[11px] text-sky-600 bg-sky-50 p-1.5 rounded-md mt-1.5 border border-sky-100 leading-tight whitespace-pre-wrap">
                         {project.pickupComment}

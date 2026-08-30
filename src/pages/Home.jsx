@@ -27,10 +27,10 @@ export default function Home() {
       // ① Scratch 作品データの取得
       try {
         const promises = SLIDE_PROJECT_IDS.map(async (id) => {
-          const res = await fetch(`https://api.scratch.mit.edu/projects/${id}`);
-          if (!res.ok) throw new Error();
-          return await res.json();
-        });
+  const res = await fetch(`/api/scratch?type=project&target=${id}`);
+  if (!res.ok) throw new Error();
+  return await res.json();
+});
         const projects = await Promise.all(promises);
         setPickupProjects(projects);
       } catch (e) {
