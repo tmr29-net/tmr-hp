@@ -145,8 +145,8 @@ export default function Posts() {
     <div className="space-y-6 max-w-2xl mx-auto relative">
       <div className="border-b border-slate-200 pb-4 flex justify-between items-end">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800">投稿 / タイムライン</h1>
-          <p className="text-sm text-slate-500 mt-1">tomo_piyoのつぶやきスペース。気軽にコメントしてね！</p>
+          <h1 className="text-2xl font-bold text-slate-800">投稿</h1>
+          <p className="text-sm text-slate-500 mt-1">とぅもろーのつぶやきスペース。気軽にコメントしてね！</p>
         </div>
         {isAdmin && (
           <span className="text-xs bg-sky-100 text-sky-700 px-2.5 py-1 rounded-full font-medium">
