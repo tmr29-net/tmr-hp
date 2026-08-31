@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 // ① ピックアップしたい作品（改行を含めることも可能です）
 const PICKUP_PROJECT_IDS = [
+  { id: '1375569473', comment: 'ともクラⅣ第11話!\n撮影時間は過去最長!?' },
   { id: '1374961866', comment: 'ともクラⅣ第10話!\n暑い夏にはやっぱり怪談!?' },
   { id: '1374682469', comment: 'え、そこの君、\nScratchでけいふぉんとを表示させたい?' },
 ];

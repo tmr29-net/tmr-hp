@@ -18,7 +18,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   // カルーセルに表示したい Scratch 作品の ID リスト
-  const SLIDE_PROJECT_IDS = ['1374961866', '1365423687', '813444488'];
+  const SLIDE_PROJECT_IDS = ['1375569473', '1365423687', '813444488'];
 
   useEffect(() => {
     const fetchData = async () => {
